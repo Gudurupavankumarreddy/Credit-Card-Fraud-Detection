@@ -1,0 +1,22 @@
+# Virtual Environment
+.venv/
+
+# Python Cache
+__pycache__/
+*.pyc
+
+# CatBoost Training Files
+catboost_info/
+
+# Dataset
+creditcard.csv
+
+# Jupyter Notebook Cache
+.ipynb_checkpoints/
+
+# VS Code Settings
+.vscode/
+
+# OS Files
+.DS_Store
+Thumbs.db
