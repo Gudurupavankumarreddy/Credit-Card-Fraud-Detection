@@ -7,8 +7,7 @@ explainable, interactive dashboard and API.
 **Live Demo:** _add your deployed Streamlit link here_
 **API Docs:** _add your deployed FastAPI `/docs` link here (if hosted)_
 
-<!-- Add a hero screenshot of the Home page here -->
-<!-- ![Home Page](screenshots/home.png) -->
+![Home Page](screenshots/home.png)
 
 ---
 
@@ -55,15 +54,6 @@ catching fraud without over-flagging legitimate transactions.
 tuned against the precision-recall curve to maximize F1-score, landing at **≈0.966** — reflecting
 just how confidently the model needs to flag a transaction before acting on it.
 
-## 🧠 Explainability
-
-Every prediction is explained with **SHAP** (TreeExplainer):
-- Summary and feature-importance plots show which PCA components drive fraud predictions overall
-- Per-transaction **waterfall plots** show exactly why *this* transaction was flagged or cleared
-
-<!-- Add a SHAP waterfall screenshot here -->
-<!-- ![SHAP Waterfall](screenshots/shap_waterfall.png) -->
-
 ## 🖥️ Dashboard (Streamlit)
 
 A four-page interactive dashboard:
@@ -75,9 +65,22 @@ A four-page interactive dashboard:
 | 📁 **Batch Prediction** | Upload a CSV, score every row, download results |
 | ℹ️ **About** | Project summary, tech stack, links |
 
-<!-- Add screenshots here -->
-<!-- ![Demo Prediction](screenshots/demo_prediction.png) -->
-<!-- ![Batch Prediction](screenshots/batch_prediction.png) -->
+**Demo Prediction — a real fraud transaction, correctly caught:**
+
+![Demo Prediction](screenshots/demo_prediction.png)
+
+## 🧠 Explainability
+
+Every prediction is explained with **SHAP** (TreeExplainer) — a per-transaction waterfall plot
+shows exactly which features pushed the score toward fraud or legitimate, and by how much.
+
+In the example above, `V14` is the dominant signal pushing this transaction toward fraud:
+
+![SHAP Waterfall](screenshots/shap_waterfall.png)
+
+**Batch scoring — upload any CSV, get predictions for every row:**
+
+![Batch Prediction](screenshots/batch_prediction.png)
 
 ## ⚡ API (FastAPI)
 
@@ -86,10 +89,9 @@ A companion REST API serves the same model for programmatic access:
 - `GET /` — health check + model info
 - `POST /predict` — score a single transaction (29 fields: `V1`–`V28`, `Amount`)
 
-Interactive docs auto-generated at `/docs` (Swagger UI).
+Interactive docs auto-generated at `/docs` (Swagger UI):
 
-<!-- Add a screenshot of the /docs page or a sample request/response here -->
-<!-- ![FastAPI Docs](screenshots/fastapi_docs.png) -->
+![FastAPI Docs](screenshots/fastapi_docs.png)
 
 **Example request:**
 ```bash
@@ -115,7 +117,7 @@ curl -X POST "http://127.0.0.1:8000/predict" \
 
 ## 🛠️ Tech Stack
 
-- **Modeling:** scikit-learn, XGBoost, CatBoost, LightGBM (compared), imbalanced-learn techniques
+- **Modeling:** scikit-learn, XGBoost, CatBoost, AdaBoost (compared), imbalanced-learn techniques
 - **Explainability:** SHAP
 - **Dashboard:** Streamlit
 - **API:** FastAPI, Pydantic, Uvicorn
@@ -133,6 +135,7 @@ Credit Fraud Detection/
 ├── xgb_fraud_model.pkl      # Trained XGBoost model
 ├── robust_scaler.pkl        # Fitted RobustScaler (Amount)
 ├── threshold.pkl            # Tuned decision threshold
+├── screenshots/             # README images
 └── requirements.txt
 ```
 
@@ -140,8 +143,8 @@ Credit Fraud Detection/
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/Gudurupavankumarreddy/<repo-name>.git
-cd <repo-name>
+git clone https://github.com/Gudurupavankumarreddy/Credit-Card-Fraud-Detection.git
+cd Credit-Card-Fraud-Detection
 
 # 2. Install dependencies
 pip install -r requirements.txt
